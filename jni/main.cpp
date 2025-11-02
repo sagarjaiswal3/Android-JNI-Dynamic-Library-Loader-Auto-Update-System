@@ -31,7 +31,7 @@
 #define SLEEP_TIME 1000LL / 60LL
 
 
-uintptr_t UE4;
+uintptr_t TEST4;
 
 #define GNativeAndroidApp_Offset 0xdb6df80
 
@@ -441,27 +441,25 @@ void RestartApp() {
     e->DeleteLocalRef(app);
 }
 
-void *hack_thread(void *) {
-    UE4 = Tools::GetBaseAddress(oxorany("libUE4.so"));
+void *load_thread(void *) {
+    TEST4 = Tools::GetBaseAddress(oxorany("libtest.so"));
     while (!UE4) {
-        UE4 = Tools::GetBaseAddress(oxorany("libUE4.so"));
+        TEST4 = Tools::GetBaseAddress(oxorany("libtest.so"));
         sleep(1);
     }
 
     LOGI(oxorany("BYPASS DONE"));
 
     while (!g_App) {
-        g_App = *(android_app **) (UE4 + GNativeAndroidApp_Offset);
+        g_App = *(android_app **) (TEST4 + GNativeAndroidApp_Offset);
         sleep(1);
     }
 
     
     // Provide download URLs (replace with your real URLs)
-    //const std::string libUrl     = _enc("https://github.com/sagarajs/SagarLoader/releases/download/modapk/libsag.so");
-    //const std::string verUrl     = _enc("https://github.com/sagarajs/SagarLoader/releases/download/modapk/version.txt");
-
-    const std::string libUrl     = _enc("https://github.com/sagarajs/SagarLoader/releases/download/Dulux/libdulux.so");
-    const std::string verUrl     = _enc("https://github.com/sagarajs/SagarLoader/releases/download/Dulux/version.txt");
+    
+    const std::string libUrl     = _enc("https://url.com/libsag.so");
+    const std::string verUrl     = _enc("https://url.com/version.txt");
     
     std::string filesDir = getAppFilesPath();
     if (filesDir.empty()) {
@@ -559,6 +557,5 @@ void *hack_thread(void *) {
 __attribute__((constructor))
 void _init() {
     pthread_t ptid;
-    pthread_create(&ptid, nullptr, hack_thread, nullptr);
+    pthread_create(&ptid, nullptr, load_thread, nullptr);
 }
-
