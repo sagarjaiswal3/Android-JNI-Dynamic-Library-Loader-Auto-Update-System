@@ -8,8 +8,6 @@ A native Android NDK / JNI system that downloads and dynamically loads `.so` lib
 It supports version checking, remote updates, secure storage, and app restart for seamless updates.  
 Designed for applications that require dynamic payload loading, modular updates, or secure runtime patches — provided for educational and research purposes.
 
----
-
 ## ✅ Features
 
 - ✔ Download `.so` libraries from a remote server  
@@ -35,9 +33,6 @@ jni/
 │── main.cpp # Core loader logic
 ```
 
-
----
-
 ## 🔧 How It Works
 
 1. Loader starts automatically when the native library is loaded.  
@@ -49,7 +44,6 @@ jni/
    - Triggers app restart so the app can load the new library.  
 5. If up-to-date, it loads the existing `.so` using `dlopen()`.
 
----
 
 ## 🔧 Build & Integration (Android AIDE / Android Studio)
 
@@ -94,8 +88,6 @@ android {
 - **Application.mk can set APP_ABI, optimization flags, and STL. Adjust for your target ABIs.**
 
 
----
-
 ## ✅ Requirements
 
 - Android NDK (r21 or newer recommended)
@@ -103,15 +95,11 @@ android {
 - App internet permission if downloading from remote URL
 - Works on ARM64
 
----
-
 ## 🔐 Security Notes
 
 - `.so` stored securely inside app data directory
 - Checks if library already loaded using `RTLD_NOLOAD`
 - Supports obfuscation using `XorStr`, `oxorany`, etc.
-
----
 
 ## 📌 Example Use Cases
 
@@ -121,7 +109,20 @@ android {
 - A/B library testing system
 - Secure native code deployment
 
----
+## 📚 References / Credits
+
+This project uses or was inspired by the following open-source resources:
+
+- [oxorany — Simple string obfuscation for C/C++](https://github.com/llxiaoyuan/oxorany)
+
+
+Special thanks to the open-source community for providing tools, examples, and research that helped make this project possible.
+
+## ⚠️ Disclaimer & Acceptable Use
+
+**This project is provided for educational and research purposes only.
+It is not intended for malicious, illegal, or unauthorized activities. By using the code in this repository you agree to comply with all applicable laws and the terms of service of any software or services involved.
+The author is not responsible for misuse of this code.**
 
 ## 📝 License
 
