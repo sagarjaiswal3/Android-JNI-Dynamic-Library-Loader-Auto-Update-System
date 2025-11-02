@@ -1,0 +1,6 @@
+APP_ABI          := arm64-v8a#all
+APP_STL          := c++_static
+APP_OPTIM        := release
+APP_PLATFORM     := android-21
+APP_THIN_ARCHIVE := true
+
